@@ -32,7 +32,7 @@ using namespace std;
 void f_input_array(int*);
 void f_show_array(int*);
 int f_average_array(int*);
-int f_provision(int*, int*);
+double f_provision(int*, int*);
 void f_discount(int*, int*);
 void f_area_circle();
 
@@ -51,7 +51,7 @@ int main() {
 	int provision = 0;
 	int* pprovision = &provision;
 	int* pumsatz = &umsatz;
-	int proveuro = 0;
+	double proveuro = 0;
 	int preis = 0;
 	int menge = 0;
 	int* ppreis = &preis;
@@ -60,6 +60,7 @@ int main() {
 
 	while (1) {
 
+		system("cls");
 		printf("------------------------------------\n");
 		printf("Eingabe des Arrays ............... 1\n");
 		printf("Anzeige des Arrays ............... 2\n");
@@ -79,25 +80,29 @@ int main() {
 		case 1:
 			f_input_array(ptatjana);
 			printf("\n");
+			system("pause");
 			break;
 
 		case 2:
 			f_show_array(ptatjana);
 			printf("\n");
+			system("pause");
 			break;
 
 		case 3:
 			result = f_average_array(ptatjana);
 			printf("Der Arraydurchschnitt betr%cgt: %d\n\n", 132, result);
 			printf("\n");
+			system("pause");
 			break;
 
 		case 4:
 			cout << "Geben Sie zwei Zahlen ein, den Umsatz inkl. 20 %% USt und die Provision in %\n";
 			cin >> umsatz >> provision;
 			proveuro = f_provision(pprovision, pumsatz);
-			printf("Die Provision betr%cgt: %d EURO\n", 132, proveuro);
+			printf("Die Provision betr%cgt: %f EURO\n", 132, proveuro);
 			printf("\n");
+			system("pause");
 			break;
 
 		case 5:
@@ -106,17 +111,18 @@ int main() {
 			f_discount(pmenge, ppreis);
 			printf("Der Gesamtpreis betr%cgt: %d EUR\n", 132, preis);
 			printf("\n");
+			system("pause");
 			break;
 
 		case 6:
 			f_area_circle();
 			printf("\n");
+			system("pause");
 			break;
 
 		case 9:
 			printf("\n");
 			printf("Programm wird beendet\n");
-			//exit(0);
 			return SUCCESS;
 
 		default:
@@ -124,10 +130,6 @@ int main() {
 			printf("\n");
 		}
 	}
-
-
-
-	system("pause");
 
 	return SUCCESS;
 }
@@ -199,10 +201,10 @@ int f_average_array(int* ptatjana) {
 ///@return proveuro Returns the Provision in EUR
 //
 
-int f_provision(int* pprovision, int* pumsatz) {
+double f_provision(int* pprovision, int* pumsatz) {
 
-	int netto = 0;
-	int proveuro = 0;
+	double netto = 0;
+	double proveuro = 0;
 
 	if ((pumsatz < 0) && (pprovision < 0)) {
 		printf("Geben Sie einen gr%cßeren Wert als 0 ein. \n", 148);
@@ -230,16 +232,19 @@ void f_discount(int* pmenge, int* ppreis) {
 	if (*pmenge >= 10000) {
 		rabatt = *ppreis / 100 * 10;
 		*ppreis = *ppreis - rabatt;
+		*ppreis = *ppreis * *pmenge;
 		*pmenge = 0;
 	}
 	else if (*pmenge >= 5000) {
 			rabatt = *ppreis / 100 * 5;
 			*ppreis = *ppreis - rabatt;
+			*ppreis = *ppreis * *pmenge;
 			*pmenge = 0;
 	}
 	else if (*pmenge > 500) {
 		rabatt = *ppreis / 100 * 2;
 		*ppreis = *ppreis - rabatt;
+		*ppreis = *ppreis * *pmenge;
 		*pmenge = 0;
 	}
 	else {
